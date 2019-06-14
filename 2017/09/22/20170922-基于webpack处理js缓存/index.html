@@ -98,13 +98,13 @@
 <meta property="og:site_name">
 <meta property="og:description" content="前端开发经常会遇到一个问题，我们把前端代码发布完之后，用户反馈页面出现异常，实际上强制刷新下异常就可以正常使用！原因是发布修改了js文件中的js代码，发布代码到线上后。用户的浏览器使用的还是原来js缓存。所以并不会马上生效。 如何才能让浏览器使用最新的js文件呢？ 解决方案1.可以给js添加时间戳!    弊端：但是添加完时间戳后，用户每次请求都需要加载新的js，这样如果你的用户量比较大, 占用带">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://vicky.github.io/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/1.png">
-<meta property="og:image" content="http://vicky.github.io/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/2.png">
+<meta property="og:image" content="http://vicky.github.io/blog//2017/09/22/20170922-基于webpack处理js缓存/1.png">
+<meta property="og:image" content="http://vicky.github.io/blog//2017/09/22/20170922-基于webpack处理js缓存/2.png">
 <meta property="og:updated_time" content="2019-06-14T02:56:31.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于webpack处理js缓存">
 <meta name="twitter:description" content="前端开发经常会遇到一个问题，我们把前端代码发布完之后，用户反馈页面出现异常，实际上强制刷新下异常就可以正常使用！原因是发布修改了js文件中的js代码，发布代码到线上后。用户的浏览器使用的还是原来js缓存。所以并不会马上生效。 如何才能让浏览器使用最新的js文件呢？ 解决方案1.可以给js添加时间戳!    弊端：但是添加完时间戳后，用户每次请求都需要加载新的js，这样如果你的用户量比较大, 占用带">
-<meta name="twitter:image" content="http://vicky.github.io/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/1.png">
+<meta name="twitter:image" content="http://vicky.github.io/blog//2017/09/22/20170922-基于webpack处理js缓存/1.png">
 
 
 
@@ -369,10 +369,10 @@
 <p>下面的内容需要你对webpack的使用有一定的理解，如果没有，请出门右转 <a href="http://webpack.github.io/" target="_blank" rel="noopener">webpack官网</a>!!</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">entry</span>: &#123; <span class="comment">//入口js文件</span></span><br><span class="line">	<span class="attribute">app</span>: <span class="string">'./webpack/app/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">start</span>: <span class="string">'./webpack/start/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">exchange</span>: <span class="string">'./webpack/exchange/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">report</span>: <span class="string">'./webpack/report/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">manage</span>: <span class="string">'./webpack/manage/main.jsx'</span>,</span><br><span class="line">  <span class="attribute">vipcharge</span>: <span class="string">'./webpack/vipcharge/main.jsx'</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attribute">output</span>: &#123; <span class="comment">//输出js文件</span></span><br><span class="line">	<span class="attribute">filename</span>: <span class="string">'entry/[name]-[chunkhash].js'</span>,</span><br><span class="line">	<span class="attribute">chunkFilename</span>: <span class="string">'chunk/[name]-[chunkhash].js'</span>,</span><br><span class="line">	<span class="attribute">publicPath</span>: <span class="string">'/static/'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>在output上配置[chunkhash]的话，webpack生成的js会带上hash串</p>
-<img src="/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/1.png">  
+<img src="/blog//2017/09/22/20170922-基于webpack处理js缓存/1.png">  
 <p>哈哈哈，是不是很简单，但是不要以为这样就完事了！！！！！<br>因为我们的js文件名称是不断的发生变化的，你在html那里引入不能是写死 src=”xxx-{hash}.js”，这里必须是要动态生成的！！！</p>
 <p>也就是说，你webpack打包的时候需要动态的去修改html里面js的src；</p>
-<img src="/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/2.png">  
+<img src="/blog//2017/09/22/20170922-基于webpack处理js缓存/2.png">  
 <p>不过webpack已经为我们提供了动态修改html的插件（<a href="https://github.com/jantimon/html-webpack-plugin" target="_blank" rel="noopener">html-webpack-plugin</a>）</p>
 <p>根据教程使用这个插件就可以实现webpack打包的时候动态修改html里面js的src！！！<br>如果你觉得已经够了的话,就可以去官网学习html-webpack-plugin的使用方法了！！！</p>
 <h3 id="但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！"><a href="#但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！" class="headerlink" title="但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！"></a>但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！</h3><p>(其实一部分原因是使用html-webpack-plugin会有一些不适合我项目的东西，会导致我项目显得很重)<br>比如html-webpack-plugin需要一个demo的html，然后它基于demo.html去生成新的html，所以就需要2个html！一个index-demo.html，一个index.html,因为后端是go而不是node，go启动项目要先生成index.html才能启动（后端同事很可能会吐槽我），而且项目本身是多入口（6个），html-webpack-plugin需要new6个配置，显得很长！！！所以我感觉可以自己动手写个webpack插件，简单处理一下，！！！</p>

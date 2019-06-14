@@ -362,13 +362,13 @@
       
         
           
-            <h2 id="1-没有标题的标题"><a href="#1-没有标题的标题" class="headerlink" title="1. 没有标题的标题"></a>1. 没有标题的标题</h2><p>某天，我们公司有个需求里面有一块需要做一个省市区三级联动的选择器（手机端），我内心想：简单呀，网上找个demo一套就行了吖，然后美滋滋下班！！但是发现网上并没有适用的手机端三级联动选择器！宝宝好委屈，但宝宝不说！<br><img src="/blog/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/1.jpg"><br>但仔细想想，网上没有好的，那我可以模范ios的三级联动自己写呀，写的好的话还可以装比卖萌呀，咳咳！不是，仔细想了一下，人生的意义在于什么？在于折腾！！！生命的意义在于什么，在于创造呀！！！在一瞬间像我这么才华横溢的人就应该不走寻常路！！！ 你们说对不对！！掌声在哪里？<br><img src="/blog/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/a.jpg"><br>趁着这三分钟的热度还没消散，果断撸起了代码。但是三分钟过后！好难呀，这么写呀，ios的效果好顺畅，好牛逼呀，感觉是用了什么牛逼算法呀，我不懂算法，怎么办！！！<br><img src="/blog/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2.jpg"><br>其实ios的三级联动在我看来跟iscroll这个库的效果是一致的，之前我曾经看过iscroll的源码，自己重新写了一个类似简单的iscroll的库，100行左右的代码，毕竟知识的搬运工是很勤奋的！</p>
+            <h2 id="1-没有标题的标题"><a href="#1-没有标题的标题" class="headerlink" title="1. 没有标题的标题"></a>1. 没有标题的标题</h2><p>某天，我们公司有个需求里面有一块需要做一个省市区三级联动的选择器（手机端），我内心想：简单呀，网上找个demo一套就行了吖，然后美滋滋下班！！但是发现网上并没有适用的手机端三级联动选择器！宝宝好委屈，但宝宝不说！<br><img src="/blog//2017/10/27/20171027-js实现类似ios省市区三级联动选择器/1.jpg"><br>但仔细想想，网上没有好的，那我可以模范ios的三级联动自己写呀，写的好的话还可以装比卖萌呀，咳咳！不是，仔细想了一下，人生的意义在于什么？在于折腾！！！生命的意义在于什么，在于创造呀！！！在一瞬间像我这么才华横溢的人就应该不走寻常路！！！ 你们说对不对！！掌声在哪里？<br><img src="/blog//2017/10/27/20171027-js实现类似ios省市区三级联动选择器/a.jpg"><br>趁着这三分钟的热度还没消散，果断撸起了代码。但是三分钟过后！好难呀，这么写呀，ios的效果好顺畅，好牛逼呀，感觉是用了什么牛逼算法呀，我不懂算法，怎么办！！！<br><img src="/blog//2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2.jpg"><br>其实ios的三级联动在我看来跟iscroll这个库的效果是一致的，之前我曾经看过iscroll的源码，自己重新写了一个类似简单的iscroll的库，100行左右的代码，毕竟知识的搬运工是很勤奋的！</p>
 <p>iscroll的库里面只有一个核心算法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">momentum</span>(<span class="params">current, start, time, lowerMargin, wrapperSize, deceleration</span>) </span>&#123;</span><br><span class="line"><span class="comment">//当前位置 current</span></span><br><span class="line"><span class="comment">//开始位置 start</span></span><br><span class="line"><span class="comment">//经历时间 time</span></span><br><span class="line"><span class="comment">//最大滚动长度  lowerMargin</span></span><br><span class="line"><span class="comment">//屏幕高度  wrapperSize</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> distance = current - start,</span><br><span class="line">    speed = <span class="built_in">Math</span>.abs(distance) / time,</span><br><span class="line">    destination,</span><br><span class="line">    duration;</span><br><span class="line"></span><br><span class="line">  deceleration = deceleration === <span class="literal">undefined</span> ? <span class="number">0.0006</span> : deceleration; <span class="comment">//加速度a</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// s = at*t/2    t = v/a      s = v*v/2*a</span></span><br><span class="line">  destination = current + ( speed * speed ) / ( <span class="number">2</span> * deceleration ) * ( distance &lt; <span class="number">0</span> ? <span class="number">-1</span> : <span class="number">1</span> );</span><br><span class="line"></span><br><span class="line">  duration = speed / deceleration;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( destination &lt; lowerMargin ) &#123;</span><br><span class="line">    destination = wrapperSize ? lowerMargin - ( wrapperSize / <span class="number">2.5</span> * ( speed / <span class="number">8</span> ) ) : lowerMargin;</span><br><span class="line">    distance = <span class="built_in">Math</span>.abs(destination - current);</span><br><span class="line">    duration = distance / speed;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( destination &gt; <span class="number">0</span> ) &#123;</span><br><span class="line">    destination = wrapperSize ? wrapperSize / <span class="number">2.5</span> * ( speed / <span class="number">8</span> ) : <span class="number">0</span>;</span><br><span class="line">    distance = <span class="built_in">Math</span>.abs(current) + destination;</span><br><span class="line">    duration = distance / speed;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    destination: <span class="built_in">Math</span>.round(destination),</span><br><span class="line">    duration: duration</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这应该是匀减速运动的基本公式(由s=at<em>t/2,t=v/a得出s=v</em>v/2*a), 知识搬运工就是强大呀！最后基于自己简易版的iscroll，实现了三级联动选择器<br>demo代码 <a href="https://codepen.io/yuanxiaosi/pen/KjdQbd" target="_blank" rel="noopener">https://codepen.io/yuanxiaosi/pen/KjdQbd</a> ( 请使用手机调试模式, 体验更加流畅哦 )<br>哇，狂拽酷炫吊炸天！掌声不绝！<br><img src="/blog/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/b.jpg"><br>因为项目代码是react，我只是基于react写了一个小组件，<br>1.style标签里面是主要样式</p>
+<p>这应该是匀减速运动的基本公式(由s=atxt/2,t=v/a得出s=vxv/2xa), 知识搬运工就是强大呀！最后基于自己简易版的iscroll，实现了三级联动选择器<br>demo代码 <a href="https://codepen.io/yuanxiaosi/pen/KjdQbd" target="_blank" rel="noopener">https://codepen.io/yuanxiaosi/pen/KjdQbd</a> ( 请使用手机调试模式, 体验更加流畅哦 )<br>哇，狂拽酷炫吊炸天！掌声不绝！<br><img src="/blog//2017/10/27/20171027-js实现类似ios省市区三级联动选择器/b.jpg"><br>因为项目代码是react，我只是基于react写了一个小组件，<br>1.style标签里面是主要样式</p>
 <p>2.引入的select-iscroll.js是核心js库,用new初始化组件，还有获取当前位置和设置当前位置的方法getIndex和setIndex</p>
 <p>3.html里面内嵌的js是联动的业务js了</p>
-<p>其实我可以写成原生js版的，但是业务繁忙，懒得倒弄，而且我们公司的人大都是reacter，我自己写react也写习惯了, 嘿嘿，人有惰性，难以自已，但仍希望自己不忘初心，粪发图强！我提供的是思路，如果对demo代码意见或者建议,可以自己改进！不用来找我！<br><img src="/blog/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/2017/10/27/20171027-js实现类似ios省市区三级联动选择器/3.jpg"> </p>
+<p>其实我可以写成原生js版的，但是业务繁忙，懒得倒弄，而且我们公司的人大都是reacter，我自己写react也写习惯了, 嘿嘿，人有惰性，难以自已，但仍希望自己不忘初心，粪发图强！我提供的是思路，如果对demo代码意见或者建议,可以自己改进！不用来找我！<br><img src="/blog//2017/10/27/20171027-js实现类似ios省市区三级联动选择器/3.jpg"> </p>
 
           
         
@@ -816,11 +816,11 @@
 <p>然后在新建文件夹下启动命令行工具，你应该有git吧！！！然后在命令行上输入node index, 然后在浏览器上访问localhost就可以看到页面了，然后点击按钮就可以看到效果啦！！</p>
 <p>是不是很简单，很小白，就可以处理重复提交的问题了！！！</p>
 <h3 id="理想总是很丰满，现实总残酷得让人绝望。"><a href="#理想总是很丰满，现实总残酷得让人绝望。" class="headerlink" title="理想总是很丰满，现实总残酷得让人绝望。"></a>理想总是很丰满，现实总残酷得让人绝望。</h3><p>我项目中ajax请求可不只一个哦，大概几十吧！ 里面有很多ajax请求都需要防止重复提交，如果是项目开始的时候跟我提这个bug，我可能会一个个得去写，写几十把锁，so easy拉<br>但是我砖都搬完了，你叫我一个个去找再去写，老夫有点接受不了了！！</p>
-<img src="/blog/2017/09/25/20170925-防止ajax重复提交/2017/09/25/20170925-防止ajax重复提交/1.jpg">  
+<img src="/blog//2017/09/25/20170925-防止ajax重复提交/1.jpg">  
 <p>也幸亏我项目之前用了axios.js，我所有的请求都有一个过滤器，有一些公共的东西可以统一处理，例如所有请求都要的加载条和所有请求都要加时间戳来防止缓存，不然我一个个去加，可能我已经猝死了！</p>
-<img src="/blog/2017/09/25/20170925-防止ajax重复提交/2017/09/25/20170925-防止ajax重复提交/2.png">
+<img src="/blog//2017/09/25/20170925-防止ajax重复提交/2.png">
 <p>然后我一直在想这个过滤器上做文章，但是在上面加锁是不可能的，因为我们可能会同时请求几个借口拉取页面数据，几个你都同时加锁的话会导致一些接口无法使用，因为被锁住了！ 我思考了好久，我个人觉得可以在html和css上做处理，我们可以定义一个html遮盖层，覆盖整个页面（透明度为0），然后ajax请求开始前就浮现出来，结束后隐藏，然后在过滤器上加上这个，就可以改一处代码，实现n处加锁了 /微笑</p>
-<img src="/blog/2017/09/25/20170925-防止ajax重复提交/2017/09/25/20170925-防止ajax重复提交/3.png">
+<img src="/blog//2017/09/25/20170925-防止ajax重复提交/3.png">
 <p>然后回到之前的index.html，click那块可以改成<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  mask.style.display = <span class="string">"block"</span>;</span><br><span class="line">  ajax(&#123;</span><br><span class="line">    method: <span class="string">"get"</span>,</span><br><span class="line">    url: <span class="string">"/api/data"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      page: <span class="number">1</span>,</span><br><span class="line">      count: <span class="number">5</span></span><br><span class="line">    &#125;,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(res)</span><br><span class="line">      mask.style.display = <span class="string">"none"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>卧槽！！！牛逼呀，厉害呀！吊炸天呀！！！比以前少了2行代码呀！！</p>
 <p>好了，这就是我处理重复提交的方法，我目前没有遇到什么大问题，可能是我的项目没有什么流量吧！如果有什么建议和我做得不足的地方可以微信或者QQ给我指出，作为回报，我可以在lol或者王者里面带你上分哦！亲！ /蜜汁微笑</p>
@@ -974,10 +974,10 @@
 <p>下面的内容需要你对webpack的使用有一定的理解，如果没有，请出门右转 <a href="http://webpack.github.io/" target="_blank" rel="noopener">webpack官网</a>!!</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">entry</span>: &#123; <span class="comment">//入口js文件</span></span><br><span class="line">	<span class="attribute">app</span>: <span class="string">'./webpack/app/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">start</span>: <span class="string">'./webpack/start/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">exchange</span>: <span class="string">'./webpack/exchange/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">report</span>: <span class="string">'./webpack/report/main.jsx'</span>,</span><br><span class="line">	<span class="attribute">manage</span>: <span class="string">'./webpack/manage/main.jsx'</span>,</span><br><span class="line">  <span class="attribute">vipcharge</span>: <span class="string">'./webpack/vipcharge/main.jsx'</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attribute">output</span>: &#123; <span class="comment">//输出js文件</span></span><br><span class="line">	<span class="attribute">filename</span>: <span class="string">'entry/[name]-[chunkhash].js'</span>,</span><br><span class="line">	<span class="attribute">chunkFilename</span>: <span class="string">'chunk/[name]-[chunkhash].js'</span>,</span><br><span class="line">	<span class="attribute">publicPath</span>: <span class="string">'/static/'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>在output上配置[chunkhash]的话，webpack生成的js会带上hash串</p>
-<img src="/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/1.png">  
+<img src="/blog//2017/09/22/20170922-基于webpack处理js缓存/1.png">  
 <p>哈哈哈，是不是很简单，但是不要以为这样就完事了！！！！！<br>因为我们的js文件名称是不断的发生变化的，你在html那里引入不能是写死 src=”xxx-{hash}.js”，这里必须是要动态生成的！！！</p>
 <p>也就是说，你webpack打包的时候需要动态的去修改html里面js的src；</p>
-<img src="/blog/2017/09/22/20170922-基于webpack处理js缓存/2017/09/22/20170922-基于webpack处理js缓存/2.png">  
+<img src="/blog//2017/09/22/20170922-基于webpack处理js缓存/2.png">  
 <p>不过webpack已经为我们提供了动态修改html的插件（<a href="https://github.com/jantimon/html-webpack-plugin" target="_blank" rel="noopener">html-webpack-plugin</a>）</p>
 <p>根据教程使用这个插件就可以实现webpack打包的时候动态修改html里面js的src！！！<br>如果你觉得已经够了的话,就可以去官网学习html-webpack-plugin的使用方法了！！！</p>
 <h3 id="但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！"><a href="#但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！" class="headerlink" title="但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！"></a>但是有的人可能很任性，我不喜欢不明就里的使用别人的插件，我要完全使用于自己的插件，我就要自己动手去尝试实践，不撞南墙不回头！</h3><p>(其实一部分原因是使用html-webpack-plugin会有一些不适合我项目的东西，会导致我项目显得很重)<br>比如html-webpack-plugin需要一个demo的html，然后它基于demo.html去生成新的html，所以就需要2个html！一个index-demo.html，一个index.html,因为后端是go而不是node，go启动项目要先生成index.html才能启动（后端同事很可能会吐槽我），而且项目本身是多入口（6个），html-webpack-plugin需要new6个配置，显得很长！！！所以我感觉可以自己动手写个webpack插件，简单处理一下，！！！</p>
@@ -1133,7 +1133,7 @@
 <p>一个标准的3次贝塞尔曲线需要4个点：起始点、终止点（也称锚点）以及两个相互分离的中间点。</p>
 <p><a href="http://cubic-bezier.com/" target="_blank" rel="noopener">http://cubic-bezier.com/</a></p>
 <p>上面的网站是给你提供贝塞尔中间2点的坐标，起点和终点默认(0,0)(0,1)</p>
-<p>公式：  <img src="/blog/2017/09/15/170915-贝塞尔曲线/2017/09/15/170915-贝塞尔曲线/2.jpg"></p>
+<p>公式：  <img src="/blog//2017/09/15/170915-贝塞尔曲线/2.jpg"></p>
 <p>其中P0,P1,P2,P3都是二维xy向量， 拆开可以变成：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = (<span class="number">1</span>-t)^<span class="number">3</span>*P0y + <span class="number">3</span>*(<span class="number">1</span>-t)^<span class="number">2</span>*t*P1y + <span class="number">3</span>*(<span class="number">1</span>-t)*t^<span class="number">2</span>P2y + t^<span class="number">3</span>P3y;</span><br><span class="line">x = (<span class="number">1</span>-t)^<span class="number">3</span>*P0x + <span class="number">3</span>*(<span class="number">1</span>-t)^<span class="number">2</span>*t*P1x + <span class="number">3</span>*(<span class="number">1</span>-t)*t^<span class="number">2</span>P2x + t^<span class="number">3</span>P3x;</span><br></pre></td></tr></table></figure></p>
 <p>其中 P0 = (0,0), P3 = (1,1) ，然后代入后化简公式为:</p>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// x = <span class="number">3</span>p1xt(<span class="number">1</span>-<span class="built_in">t</span>)^<span class="number">2</span> + <span class="number">3</span>p2xt^<span class="number">2</span>*(<span class="number">1</span>-<span class="built_in">t</span>) + <span class="built_in">t</span>^<span class="number">3</span></span><br><span class="line">// y = <span class="number">3</span>p1yt(<span class="number">1</span>-<span class="built_in">t</span>)^<span class="number">2</span> + <span class="number">3</span>p2yt^<span class="number">2</span>*(<span class="number">1</span>-<span class="built_in">t</span>) + <span class="built_in">t</span>^<span class="number">3</span></span><br></pre></td></tr></table></figure>
@@ -1141,6 +1141,147 @@
 <p>是不是简单得不得了，一个函数就可以解决贝塞尔曲线运动求值了，其实还有更方便的方法，在css3里面已经封装好贝塞尔给大伙直接调用了，大家可以连思考都不用思考直接用哈, 直接在css transition里写就可以了！</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    *&#123;<span class="attribute">padding</span>: <span class="number">0</span>; <span class="attribute">margin</span>: <span class="number">0</span>;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="css">    <span class="selector-class">.box</span>&#123;</span></span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 0;</span><br><span class="line">      right: 0;</span><br><span class="line">      bottom: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">      width: 660px;</span><br><span class="line">      height: 660px;</span><br><span class="line">      margin: auto;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.box</span> <span class="selector-class">.img1</span>&#123;</span></span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">      width: 100%;</span><br><span class="line">      display: block;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.box</span> <span class="selector-class">.img2</span>&#123;</span></span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">      right: 0;</span><br><span class="line">      bottom: 0;</span><br><span class="line">      margin: auto;</span><br><span class="line"><span class="css">      <span class="selector-tag">transition</span>: <span class="selector-tag">all</span> 10<span class="selector-tag">s</span> <span class="selector-tag">cubic-bezier</span>(<span class="selector-class">.92</span>,<span class="selector-class">.24</span>,<span class="selector-class">.13</span>,<span class="selector-class">.84</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"img1"</span> <span class="attr">src</span>=<span class="string">"https://yuanxiaosi.github.io/blog/2017/09/15/170915-%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/pan1.png"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"img2"</span> <span class="attr">src</span>=<span class="string">"https://yuanxiaosi.github.io/blog/2017/09/15/170915-%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/pan2.png"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">animateJs</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> img2 = <span class="built_in">document</span>.querySelector(<span class="string">".img2"</span>);</span></span><br><span class="line"><span class="actionscript">      img2.style.webkitTransform = <span class="string">"rotateZ(4000deg)"</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line">      animateJs()</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-心情 " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vicky.github.io/blog/2016/03/16/心情/123/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yuanxiaosi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog/2016/03/16/心情/123/" itemprop="url">
+                  心情
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-16T08:12:43+08:00">
+                2016-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/心情/" itemprop="url" rel="index">
+                    <span itemprop="name">心情</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
           
         
       
@@ -1290,147 +1431,6 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>css3的transition和cubic-bezier是不是很强大，很简单就可以实现一个轮播拉，如果有疑问或者建议交流的可以私下找我交流一下哦!<br>吾生有崖而学无涯！！！</p>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>记得在手机模式下打开才可以看到滑动效果哦，因为都是touch事件!!!</p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-心情 " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vicky.github.io/blog/2016/03/16/心情/123/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yuanxiaosi">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/blog/2016/03/16/心情/123/" itemprop="url">
-                  心情
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-16T08:12:43+08:00">
-                2016-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/心情/" itemprop="url" rel="index">
-                    <span itemprop="name">心情</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
